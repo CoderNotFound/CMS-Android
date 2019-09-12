@@ -35,18 +35,18 @@ import crux.bphc.cms.fragments.FolderModuleFragment;
 import set.Content;
 import set.Module;
 
-public class ModulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyFolderModuleRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     CourseDataHandler courseDataHandler;
     private MyFileManager mFileManager;
     private Context context;
     private LayoutInflater inflater;
-    private List<Module> modules;
+    private List<Module> modules; //this list has to be changed to the list of modules within the folder module
     private ClickListener clickListener;
     private String courseName;
     private int maxDescriptionlines = 3;
 
-    public ModulesAdapter(Context context, MyFileManager fileManager, String courseName) {
+    public MyFolderModuleRecyclerViewAdapter(Context context, MyFileManager fileManager, String courseName) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         modules = new ArrayList<>();
@@ -121,9 +121,7 @@ public class ModulesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         if (clickListener != null)
                             clickListener.onClick(modules.get(getLayoutPosition()), getLayoutPosition());
 
-
-                        markAsReadandUnread(modules.get(getLayoutPosition()), getLayoutPosition(), false);
-                    });
+                    markAsReadandUnread(modules.get(getLayoutPosition()), getLayoutPosition(), false);});
 
             modIcon.setOnClickListener(view -> {
                 if (clickListener != null) {

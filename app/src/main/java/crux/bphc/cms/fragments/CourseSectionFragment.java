@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +42,7 @@ import set.CourseSection;
 import set.Module;
 import set.forum.Discussion;
 
+import static app.Constants.TOKEN;
 import static helper.MyFileManager.DATA_DOWNLOADED;
 
 /**
@@ -104,7 +106,10 @@ public class CourseSectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_course_section, container, false);
+
     }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -287,16 +292,21 @@ public class CourseSectionFragment extends Fragment {
 //        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), RecyclerView.VERTICAL));
 
         myAdapter.setClickListener(new ClickListener() {
+
+
             @Override
             public boolean onClick(Object object, int position) {
                 if (object instanceof Module) {
+
                     return mFileManager.onClickAction((Module) object, courseName);
                 }
                 return false;
             }
+
         });
+
         linearLayout.addView(v);
-    }
+}
 
     private String addToken(String descriptionWithOutExtraSpace) {
         int start = 0;

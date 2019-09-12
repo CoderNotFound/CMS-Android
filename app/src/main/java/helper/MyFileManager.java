@@ -29,6 +29,7 @@ import app.Constants;
 import app.MyApplication;
 import crux.bphc.cms.BuildConfig;
 import crux.bphc.cms.R;
+import crux.bphc.cms.fragments.FolderModuleFragment;
 import crux.bphc.cms.fragments.ForumFragment;
 import set.Content;
 import set.Module;
@@ -254,7 +255,18 @@ public class MyFileManager {
 
                 showInWebsite(activity, module.getUrl());
 
-        } else {
+        } else if(module.getModType() == Module.Type.FOLDER)
+        {
+
+            Fragment folderFragment = new FolderModuleFragment();
+            FragmentTransaction fragmentTransaction = ((AppCompatActivity) activity).getSupportFragmentManager().beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragment_container, folderFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
+        }
+        else {
             for (Content content : module.getContents()) {
                 if (!searchFile(content.getFilename())) {
                     Toast.makeText(activity, "Downloading file - " + content.getFilename(), Toast.LENGTH_SHORT).show();
